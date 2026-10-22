@@ -60,9 +60,10 @@ export default async function handler(req, res) {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "POST만 받아요." });
   }
-
-  const token = process.env.NOTION_TOKEN;
-  const dbId = clean(process.env.NOTION_DATABASE_ID);
+  
+const token = (String(process.env.NOTION_TOKEN || "").match(/(ntn_|secret_)[A-Za-z0-9]+/) || [])[0];
+const dbId = (clean(process.env.NOTION_DATABASE_ID).match(/[0-9a-f]{32}/) || [])[0];
+  
   if (!token || !dbId) {
     return res.status(500).json({ error: "서버에 NOTION_TOKEN 또는 NOTION_DATABASE_ID가 설정되지 않았어요." });
   }
