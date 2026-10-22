@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>흐린 창의 질문들</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Dodum&display=swap">
+<style>
+/* Layout: one narrow column of fogged-glass panels on a blue→moss dusk window, doodles finger-drawn between them */
+:root{
+  --sky:#2b52b5; --haze:#7a96cf; --mist:#5f7c93; --moss:#3b5a4a; --pine:#24372d;
+  --ink:#f1f5ff; --ink-soft:rgba(241,245,255,.74);
+  --line:#1d3f9a; --line-2:#284f3f; --wipe:rgba(255,255,255,.10); --rim:rgba(255,255,255,.28);
+  --hand:"Gaegu","Nanum Pen Script",cursive; --body:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  color-scheme:dark;
+}
+html{background:var(--pine)}
+html,body{margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{
+  background:linear-gradient(180deg,var(--sky) 0%,var(--haze) 28%,var(--mist) 48%,var(--moss) 74%,var(--pine) 100%) fixed;
+  background-color:var(--pine);
+  color:var(--ink); font-family:var(--body); font-size:16px; line-height:1.75; min-height:100%;
+  padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 72px; position:relative; overflow-x:hidden;
+}
+body::after{ /* grain */
+  content:""; position:fixed; inset:0; pointer-events:none; opacity:.35; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+main{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:56px;position:relative;z-index:1}
+
+/* finger-drawn strokes */
+.doodle{display:block;fill:none;stroke:var(--line);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.doodle.g{stroke:var(--line-2)}
+.doodle .hl{stroke:rgba(255,255,255,.35);stroke-width:2}
+.dot{fill:rgba(255,255,255,.85);stroke:none}
+
+header{padding-top:48px;display:grid;gap:8px;position:relative}
+.hello{font-family:var(--hand);font-weight:700;font-size:clamp(64px,18vw,104px);line-height:.9;color:transparent;
+  -webkit-text-stroke:3px var(--line);letter-spacing:.02em;transform:rotate(-6deg);transform-origin:left;margin:0}
+.hello span{-webkit-text-stroke:3px rgba(255,255,255,.55)}
+h1{font-family:var(--hand);font-weight:700;font-size:clamp(28px,7vw,38px);line-height:1.3;margin:24px 0 0;text-wrap:balance}
+.lede{color:var(--ink-soft);margin:0;max-width:34em}
+.tag{font-family:var(--hand);font-size:20px;color:var(--ink-soft)}
+.top-doodles{position:absolute;right:0;top:36px;width:150px}
+
+.stage{display:grid;gap:20px}
+.stage-head{display:flex;align-items:center;gap:12px;font-family:var(--hand);font-size:26px;font-weight:700}
+.stage-head svg{width:44px;height:44px;flex:none}
+.stage-head small{font-family:var(--body);font-size:12px;letter-spacing:.12em;color:var(--ink-soft);font-weight:400}
+
+.q{position:relative;background:var(--wipe);border:2px solid var(--rim);border-radius:26px 18px 30px 16px;
+  padding:22px 22px 20px;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);display:grid;gap:10px;min-width:0}
+.q h3{font-family:var(--hand);font-size:24px;line-height:1.3;margin:0;text-wrap:balance}
+.q h3 b{color:#cfe0ff;margin-right:6px}
+.q p{margin:0}
+.q .ask{font-family:var(--hand);font-size:20px;line-height:1.45;color:#fff;padding-top:4px;border-top:2px dashed rgba(255,255,255,.22)}
+.term{font-weight:700;color:#fff;background:linear-gradient(transparent 62%,rgba(29,63,154,.55) 62%)}
+.de{font-size:13px;color:var(--ink-soft)}
+.q::after{ /* drip */
+  content:"";position:absolute;width:3px;border-radius:3px;background:linear-gradient(var(--rim),rgba(255,255,255,.5));
+  height:var(--d,34px);left:var(--x,70%);top:100%;}
+.q::before{content:"";position:absolute;width:8px;height:10px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+  background:rgba(255,255,255,.75);left:calc(var(--x,70%) - 2.5px);top:calc(100% + var(--d,34px) - 2px)}
+label{font-family:var(--hand);font-size:18px;color:var(--ink-soft)}
+textarea{width:100%;min-height:84px;resize:vertical;background:rgba(10,25,40,.28);color:var(--ink);
+  border:2px solid rgba(255,255,255,.2);border-radius:14px;padding:12px 14px;font:inherit;font-family:var(--hand);font-size:20px;line-height:1.45;box-sizing:border-box}
+textarea::placeholder{color:rgba(241,245,255,.45)}
+textarea:focus-visible{outline:none;border-color:#cfe0ff;box-shadow:0 0 0 3px rgba(207,224,255,.25)}
+.nick{gap:6px;margin-top:20px;max-width:360px}
+#nick{width:100%;box-sizing:border-box;background:rgba(10,25,40,.28);color:var(--ink);border:2px solid rgba(255,255,255,.2);border-radius:14px;padding:8px 14px;font-family:var(--hand);font-size:24px;font-weight:700}
+#nick:focus-visible{outline:none;border-color:#cfe0ff;box-shadow:0 0 0 3px rgba(207,224,255,.25)}
+#nick::placeholder{color:rgba(241,245,255,.45);font-weight:400}
+.status{font-size:13px;color:var(--ink-soft);margin:0}
+.whose{color:#cfe0ff}
+.status a{color:#cfe0ff}
+.retry{justify-self:start;font-family:var(--hand);font-size:18px;color:var(--ink);background:rgba(29,63,154,.55);border:2px solid var(--rim);border-radius:999px;padding:2px 14px;cursor:pointer}
+.retry:focus-visible{outline:2px solid #cfe0ff;outline-offset:2px}
+
+.final{text-align:center;display:grid;gap:16px;justify-items:center;padding:12px 0}
+.final .big{font-family:var(--hand);font-weight:700;font-size:clamp(28px,7.5vw,40px);line-height:1.3;text-wrap:balance;margin:0}
+.final .q{width:100%;text-align:left}
+footer{text-align:center;font-family:var(--hand);font-size:18px;color:var(--ink-soft)}
+.happy{font-family:var(--hand);font-weight:700;font-size:56px;color:transparent;-webkit-text-stroke:2.5px var(--line-2);transform:rotate(-4deg);display:inline-block}
+@media (max-width:480px){.top-doodles{width:100px;top:20px}.q{padding:18px 16px}}
+@media (prefers-reduced-motion:no-preference){
+  .q{animation:fog .9s ease-out both}
+  @keyframes fog{from{filter:blur(3px)}to{filter:blur(0)}}
+}
+</style>
+</head>
+<body>
+
+
+<main>
+<header>
+  <svg class="top-doodles doodle" viewBox="0 0 150 120" aria-hidden="true">
+    <path d="M20 90 a50 50 0 0 1 100 0"/><path d="M40 90 a30 30 0 0 1 60 0"/>
+    <path d="M8 98 q2-14 16-10 q4-12 18-4 q10 0 8 14 z"/>
+    <circle class="dot" cx="70" cy="40" r="3"/><circle class="dot" cx="118" cy="88" r="3"/>
+  </svg>
+  <p class="hello" aria-hidden="true">Hell<span>o</span></p>
+  <p class="tag" id="greet" hidden>안녕, <span class="whose" id="greetName"></span></p>
+  <h1>나는 내가 원하는 삶을 살고 있는가, 아니면 남들이 원한다고 생각하는 삶을 살고 있는가?</h1>
+  <p class="lede">하이데거의 『존재와 시간』 흐름을 따라 고른 9개의 질문. 손가락으로 김 서린 창에 적듯, 떠오르는 대로 적어보세요.</p>
+  <div class="nick q" style="--x:12%;--d:30px">
+    <label for="nick">닉네임</label>
+    <input id="nick" type="text" maxlength="20" placeholder="창에 적을 이름" autocomplete="nickname">
+    <p class="status" id="status" aria-live="polite">닉네임을 적고 답을 쓰면 자동으로 저장돼요.</p>
+    <button type="button" id="retry" class="retry" hidden>다시 저장하기</button>
+  </div>
+</header>
+
+<section class="stage">
+  <div class="stage-head">
+    <svg class="doodle" viewBox="0 0 44 44" aria-hidden="true"><path d="M22 38 C6 26 6 12 15 10 c4-1 7 2 7 6 c0-4 3-7 7-6 c9 2 9 16-7 28z"/></svg>
+    <span>질문 자체를 의심하기<br><small>STAGE 1 · Q1–Q2</small></span>
+  </div>
+  <article class="q" style="--x:82%;--d:30px">
+    <h3><b>Q1.</b>"내가 원하는 것"과 "남들이 원하는 것"은 정말 분리될 수 있을까?</h3>
+    <p>우리는 처음부터 <span class="term">세인</span> <span class="de">das Man</span> 속에서 살아갑니다. "다들 그렇게 해" 하는 익명의 기준이고, 특정한 누군가가 아니라 아무도 아닌 누군가예요. 내가 원래 원했다고 믿는 것도 상당 부분 세인이 심어둔 것일 수 있어요.</p>
+    <p class="ask">지금 "내가 원한다"고 확신하는 것 세 가지는? 그중 누구에게도 배우지 않은 건 몇 개일까?</p>
+    <label for="a1">나의 답</label><textarea id="a1" placeholder="여기에 적기…"></textarea>
+  </article>
+  <article class="q" style="--x:18%;--d:44px">
+    <h3><b>Q2.</b>나는 어떤 조건 속에 '던져져' 있나?</h3>
+    <p><span class="term">피투성</span> <span class="de">Geworfenheit</span> 우리는 부모, 시대, 나라, 몸, 언어를 고르지 않고 이미 던져진 채 시작합니다. 극복할 대상이 아니라 출발점이에요.</p>
+    <p class="ask">내가 고르지 않았지만 내 선택을 강하게 규정하는 조건은?</p>
+    <label for="a2">나의 답</label><textarea id="a2" placeholder="여기에 적기…"></textarea>
+  </article>
+</section>
+
+<section class="stage">
+  <div class="stage-head">
+    <svg class="doodle" viewBox="0 0 44 44" aria-hidden="true"><path d="M22 6 l4 11 12 1 -9 8 3 12 -10-7 -10 7 3-12 -9-8 12-1z"/></svg>
+    <span>세인 속의 나를 들여다보기<br><small>STAGE 2 · Q3–Q4</small></span>
+  </div>
+  <article class="q" style="--x:64%;--d:38px">
+    <h3><b>Q3.</b>나는 요즘 무엇에 '빠져' 있나?</h3>
+    <p>일상의 비본래적 모습은 세 가지예요. <span class="term">잡담</span> 남들 말을 되풀이하기, <span class="term">호기심</span> 새로운 것만 쫓고 머물지 않기, <span class="term">애매성</span> 다 아는 것 같지만 아무것도 붙잡지 않음. 비난이 아니라 누구나 대부분 이렇게 산다는 묘사입니다.</p>
+    <p class="ask">최근 "다들 그러니까"가 이유였던 결정은? 고민 없이 흘러간 시간은 어디에 쓰였나?</p>
+    <label for="a3">나의 답</label><textarea id="a3" placeholder="여기에 적기…"></textarea>
+  </article>
+  <article class="q" style="--x:30%;--d:28px">
+    <h3><b>Q4.</b>세인 속에 있으면 무엇이 편한가?</h3>
+    <p>세인은 책임을 덜어줍니다. 실패해도 "다들 그렇게 했으니까"라고 말할 수 있으니까요. 하이데거는 이걸 <span class="term">부담 면제</span>라고 불렀어요.</p>
+    <p class="ask">남들 기준을 따를 때 나는 어떤 불안이나 책임을 피하고 있나?</p>
+    <label for="a4">나의 답</label><textarea id="a4" placeholder="여기에 적기…"></textarea>
+  </article>
+</section>
+
+<section class="stage">
+  <div class="stage-head">
+    <svg class="doodle g" viewBox="0 0 44 44" aria-hidden="true"><path d="M22 4 C14 18 10 24 10 30 a12 12 0 0 0 24 0 c0-6-4-12-12-26z"/></svg>
+    <span>흔들림을 통과하기<br><small>STAGE 3 · Q5–Q6</small></span>
+  </div>
+  <article class="q" style="--x:76%;--d:46px">
+    <h3><b>Q5.</b>언제 '불안'을 느꼈나?</h3>
+    <p><span class="term">불안</span> <span class="de">Angst</span> 특정 대상에 대한 공포와 달라요. 익숙한 세계가 갑자기 의미를 잃고 "이게 다 뭐지?" 싶어지는 순간. 병이 아니라, 세인이 덮어둔 내 존재가 드러나는 기회입니다.</p>
+    <p class="ask">모든 게 낯설고 공허했던 순간은? 그때 무엇이 무너졌고 무엇이 남았나?</p>
+    <label for="a5">나의 답</label><textarea id="a5" placeholder="여기에 적기…"></textarea>
+  </article>
+  <article class="q" style="--x:22%;--d:32px">
+    <h3><b>Q6.</b>내 죽음을 '나의 것'으로 생각해본 적 있나?</h3>
+    <p><span class="term">죽음을 향한 존재</span> <span class="de">Sein-zum-Tode</span> 세인은 "사람은 언젠가 죽지"라며 죽음을 남의 일처럼 만듭니다. 하지만 죽음만큼은 누구도 대신해줄 수 없어요. 이걸 직시하면 삶 전체가 '나의 것'으로 다시 보입니다.</p>
+    <p class="ask">시간이 유한하다는 걸 받아들이면, 지금 무엇을 그만두고 무엇을 붙잡을까?</p>
+    <label for="a6">나의 답</label><textarea id="a6" placeholder="여기에 적기…"></textarea>
+  </article>
+</section>
+
+<section class="stage">
+  <div class="stage-head">
+    <svg class="doodle g" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="16"/><path d="M15 26 q7 7 14 0"/><path d="M17 15 v4 M27 15 v4"/></svg>
+    <span>나로 돌아오기<br><small>STAGE 4 · Q7–Q9</small></span>
+  </div>
+  <article class="q" style="--x:58%;--d:36px">
+    <h3><b>Q7.</b>나를 부르는 '양심의 소리'는 무엇을 말하나?</h3>
+    <p>하이데거의 <span class="term">양심</span>은 도덕 규칙이 아니라 세인 속에 흩어진 나를 조용히 불러 세우는 소리예요. 지시하지 않고, "너는 네 존재를 떠맡고 있지 않다"고 알려줄 뿐입니다.</p>
+    <p class="ask">마음 한구석에서 반복해 올라오는데 계속 외면해온 생각이 있나?</p>
+    <label for="a7">나의 답</label><textarea id="a7" placeholder="여기에 적기…"></textarea>
+  </article>
+  <article class="q" style="--x:84%;--d:26px">
+    <h3><b>Q8.</b>본래적으로 산다는 건 세인을 떠나는 것일까?</h3>
+    <p>아니요, 핵심 오해예요. 본래성은 세인에서의 탈출이 아니라 <span class="term">세인의 한 변형</span>입니다. 같은 직업, 같은 관계라도 '그냥 주어진 것'이 아닌 '내가 떠맡은 것'으로 고르는 것. 이것이 <span class="term">결단성</span> <span class="de">Entschlossenheit</span>이에요.</p>
+    <p class="ask">겉모습은 그대로 두되, '내 선택'으로 다시 붙잡고 싶은 것은?</p>
+    <label for="a8">나의 답</label><textarea id="a8" placeholder="여기에 적기…"></textarea>
+  </article>
+  <article class="q" style="--x:36%;--d:42px">
+    <h3><b>Q9.</b>그래서, 나는 어떤 가능성을 향해 나를 던질 것인가?</h3>
+    <p><span class="term">기획투사</span> <span class="de">Entwurf</span> 인간은 완성된 존재가 아니라 늘 가능성을 향해 나아가는 존재예요. 던져진 조건(Q2) 위에서 나를 앞으로 던지는 것.</p>
+    <p class="ask">1년 뒤 "이건 내가 고른 삶이었다"고 말하고 싶은 장면 하나는?</p>
+    <label for="a9">나의 답</label><textarea id="a9" placeholder="여기에 적기…"></textarea>
+  </article>
+</section>
+
+<section class="final">
+  <svg class="doodle" viewBox="0 0 120 40" width="120" aria-hidden="true"><path d="M10 30 q20-24 40 0 t40 0"/><circle class="dot" cx="50" cy="30" r="3"/></svg>
+  <p class="tag">처음 질문을 이렇게 바꿔 적어볼 수 있어요</p>
+  <p class="big">나는 내 삶을 떠맡고 있는가,<br>아니면 흘러가게 두고 있는가?</p>
+  <article class="q" style="--x:50%;--d:40px">
+    <label for="a10">지금의 답, 한 문장으로</label><textarea id="a10" placeholder="여기에 적기…"></textarea>
+  </article>
+</section>
+
+<footer><span class="happy">happy</span><br>천천히, 내 속도로.</footer>
+</main>
+
+<script>
+(function(){
+  const KEY='fog-qa';
+  const $=id=>document.getElementById(id);
+  const fields=[...document.querySelectorAll('textarea'),$('nick')];
+  const status=$('status'), retry=$('retry');
+  let st={answers:{},pageId:null,key:null};
+  try{st=Object.assign(st,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+  if(!st.key){const b=new Uint8Array(16);crypto.getRandomValues(b);st.key=[...b].map(x=>x.toString(16).padStart(2,'0')).join('')}
+  let timer=null, busy=false, again=false;
+
+  const stamp=()=>{const t=new Date();return String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')};
+  const keep=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+  const collect=()=>{fields.forEach(f=>st.answers[f.id]=f.value)};
+  const showName=()=>{const n=$('nick').value.trim();$('greet').hidden=!n;$('greetName').textContent=n};
+
+  fields.forEach(f=>{if(typeof st.answers[f.id]==='string')f.value=st.answers[f.id]});
+  showName(); keep();
+  if(st.pageId) status.textContent='이전에 적은 답을 불러왔어요. 고치면 노션에도 반영돼요.';
+
+  async function save(){
+    if(busy){again=true;return}
+    if(!st.answers.nick||!st.answers.nick.trim()){status.textContent='닉네임을 적으면 노션에 저장을 시작해요.';return}
+    busy=true; retry.hidden=true; status.textContent='노션에 저장 중…';
+    try{
+      const r=await fetch('/api/answer',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({pageId:st.pageId,key:st.key,answers:st.answers})});
+      const d=await r.json().catch(()=>({}));
+      if(r.ok&&d.pageId){st.pageId=d.pageId;keep();status.textContent='노션에 저장됨 · '+stamp()}
+      else if(d.reset){st.pageId=null;keep();status.textContent='저장된 줄을 찾지 못해서 새로 저장할게요.';busy=false;return save()}
+      else if(r.status===429){status.textContent=d.error;setTimeout(save,4000+Math.random()*2000)}
+      else{status.textContent=(d.error||'저장하지 못했어요.')+' 답은 이 브라우저에 남아 있어요.';retry.hidden=false}
+    }catch(e){status.textContent='인터넷 연결을 확인해 주세요. 답은 이 브라우저에 남아 있어요.';retry.hidden=false}
+    busy=false; if(again){again=false;save()}
+  }
+  retry.addEventListener('click',save);
+  fields.forEach(f=>f.addEventListener('input',()=>{
+    collect(); keep(); if(f.id==='nick')showName();
+    status.textContent='적는 중…';
+    clearTimeout(timer); timer=setTimeout(save,2000);
+  }));
+})();
+</script>
+</body>
+</html>
